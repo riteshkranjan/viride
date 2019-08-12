@@ -13,6 +13,14 @@ OR
 2. docker build -t gcr.io/hackathoncouchbase/viride-acme-app .         
 3. run `docker images` and note down image id    
 4. tag image id `docker tag <imageId> gcr.io/hackathoncouchbase/viride-acme-app`       
-5. finally push this image `docker push gcr.io/hackathoncouchbase/viride-acme-app`        
+5. finally push this image `docker push gcr.io/hackathoncouchbase/viride-acme-app`     
+
+# Gcloud setup 
+after installaiton of google cloud sdk run below commands
+1. gcloud auth login    
+2. gcloud config set project hackathoncouchbase    
+3. gcloud container clusters list    
+4. gcloud container clusters get-credentials viride-cluster-1 --zone us-central1-a   
+5. kubectl get pods   
 
 
