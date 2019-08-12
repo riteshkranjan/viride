@@ -1,4 +1,6 @@
-
+## Gcloud setup   
+1. install gcloud and kubectl   
+2. 
 
 
 ## Deploying the database ###########
