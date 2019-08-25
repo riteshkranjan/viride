@@ -1,7 +1,7 @@
 apiVersion: couchbase.com/v1
 kind: CouchbaseCluster
 metadata:
-  name: cb-viride-acme
+  name: cb1-viride-acme
 spec:
   baseImage: couchbase/server
   version: enterprise-6.0.1
@@ -22,13 +22,13 @@ spec:
     eventingServiceMemoryQuota: 256
     analyticsServiceMemoryQuota: 1024
     indexStorageSetting: memory_optimized
-    autoFailoverTimeout: 10
+    autoFailoverTimeout: 120
     autoFailoverMaxCount: 3
     autoFailoverOnDataDiskIssues: true
     autoFailoverOnDataDiskIssuesTimePeriod: 120
     autoFailoverServerGroup: false
   buckets:
-    - name: cb-viride-acme-bucket
+    - name: cb1-viride-acme-bucket
       type: couchbase
       memoryQuota: 128
       replicas: 1
@@ -37,9 +37,12 @@ spec:
       conflictResolution: seqno
       enableFlush: true
       enableIndexReplica: false
+  serverGroups:
+    - us-east1-c
+    - us-east1-b
   servers:
     - size: 1
-      name: all_services
+      name: all_services_east1c
       services:
         - data
         - index
@@ -47,14 +50,37 @@ spec:
         - search
         - eventing
         - analytics
+      serverGroups:
+        - us-east1-c
       pod:
         volumeMounts:
-          default: viride-pv1
+          default: us-east1-c-cluster1
+    - size: 1
+      name: all_services_east1b
+      services:
+        - data
+        - index
+        - query
+        - search
+        - eventing
+        - analytics
+      serverGroups:
+        - us-east1-b    
+      pod:
+        volumeMounts:
+          default: us-east1-b-cluster1
   volumeClaimTemplates:
     - metadata:
-        name: viride-pv1
+        name: us-east1-c-cluster1
       spec:
-        storageClassName: standard
+        storageClassName: "standard"
         resources:
           requests:
-            storage: 1Gi
+            storage: 10Gi
+    - metadata:
+        name: us-east1-b-cluster1
+      spec:
+        storageClassName: "standard"
+        resources:
+          requests:
+            storage: 10Gi

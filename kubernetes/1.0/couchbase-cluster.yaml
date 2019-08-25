@@ -6,7 +6,7 @@ spec:
   baseImage: couchbase/server
   version: enterprise-6.0.1
   paused: false
-  antiAffinity: false
+  antiAffinity: true
   authSecret: cb-viride-acme-auth
   exposeAdminConsole: true
   adminConsoleServices:
@@ -47,7 +47,7 @@ spec:
         - search
         - eventing
         - analytics
-    - size: 2
+    - size: 1
       name: data_services
       services:
         - data
@@ -55,7 +55,3 @@ spec:
       name: index_services
       services:
         - index
-    - size: 1
-      name: query_services
-      services:
-        - query
