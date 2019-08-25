@@ -39,7 +39,6 @@ spec:
       enableIndexReplica: false
   serverGroups:
     - us-east1-d
-    - us-east1-b
   servers:
     - size: 1
       name: all_services_east2d
@@ -55,30 +54,9 @@ spec:
       pod:
         volumeMounts:
           default: us-east1-d-cluster2
-    - size: 1   
-      name: all_services_east2b
-      services:
-        - data
-        - index
-        - query
-        - search
-        - eventing
-        - analytics
-      serverGroups:
-        - us-east1-b    
-      pod:
-        volumeMounts:
-          default: us-east1-b-cluster2
   volumeClaimTemplates:
     - metadata:
         name: us-east1-d-cluster2
-      spec:
-        storageClassName: "standard"
-        resources:
-          requests:
-            storage: 10Gi
-    - metadata:
-        name: us-east1-b-cluster2
       spec:
         storageClassName: "standard"
         resources:
