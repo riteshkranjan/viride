@@ -41,8 +41,8 @@ spec:
     - us-east1-c
     - us-east1-b
   servers:
-    - size: 1
-      name: all_services_east1c
+    - size: 2
+      name: all_services
       services:
         - data
         - index
@@ -52,35 +52,13 @@ spec:
         - analytics
       serverGroups:
         - us-east1-c
-      pod:
-        volumeMounts:
-          default: us-east1-c-cluster1
-    - size: 1
-      name: all_services_east1b
+        - us-east1-b
+    - size: 2
+      name: data_services
       services:
         - data
-        - index
-        - query
-        - search
-        - eventing
-        - analytics
       serverGroups:
-        - us-east1-b    
-      pod:
-        volumeMounts:
-          default: us-east1-b-cluster1
-  volumeClaimTemplates:
-    - metadata:
-        name: us-east1-c-cluster1
-      spec:
-        storageClassName: "standard"
-        resources:
-          requests:
-            storage: 10Gi
-    - metadata:
-        name: us-east1-b-cluster1
-      spec:
-        storageClassName: "standard"
-        resources:
-          requests:
-            storage: 10Gi
+        - us-east1-c
+        - us-east1-b
+  
+  
