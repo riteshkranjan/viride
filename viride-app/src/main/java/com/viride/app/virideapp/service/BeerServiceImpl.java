@@ -102,9 +102,9 @@ public class BeerServiceImpl implements BeerService {
 	@Override
 	public void bulkAdd() {
 		Random r = new Random();
-		for (int i = 0; i < 1000; i++) {
+		for (int i = 0; i < 100000; i++) {
 			UUID u = UUID.randomUUID();
-			int randomInt = r.nextInt(1000);
+			int randomInt = r.nextInt(100000);
 			Beer b = new Beer();
 			b.setBrewery_id(u.toString());
 			b.setAbv(r.nextFloat());
@@ -124,7 +124,7 @@ public class BeerServiceImpl implements BeerService {
 	@Override
 	public void bulkDetele() {
 		List<Beer> beers = getAllBeers();
-		int limit = beers.size() > 1000 ? 1000 : beers.size();
+		int limit = beers.size() > 100000 ? 100000 : beers.size();
 		for (int i = 0; i < limit; i++) {
 			Beer b = beers.get(i);
 			repo.delete(b);
