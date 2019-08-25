@@ -11,6 +11,16 @@
 <link rel="stylesheet"
 	href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
 </head>
+<style>
+.left{
+	padding-top:6px;
+	margin-right:10px;
+}
+.right{
+	padding-top:10px;
+	margin-left:10px;
+}
+</style>
 
 <body background="bg.jpg">
 	<div class="container">
@@ -86,7 +96,7 @@
 							</table>
 							<nav aria-label="Pagination" th:if="${beers.totalPages gt 0}">
 								<ul class="pagination justify-content-center font-weight-medium">
-									<li class="page-item"
+									<li class="page-item left"
 										th:classappend="${beers.number eq 0} ? 'disabled'"><a
 										class="fa fa-angle-double-left"
 										th:href="@{/?page={id}(id=${beers.number lt 2 ? 1 : beers.number})}"
@@ -99,7 +109,7 @@
 										th:text="${i}" th:title="${'Page '+ i}" rel="tooltip"></a>
 									</li>
 
-									<li class="page-item"
+									<li class="page-item right"
 										th:classappend="${beers.number + 1 eq beers.totalPages} ? 'disabled'">
 										<a class="fas fa-angle-double-right"
 										th:href="@{/?page={id}(id=${beers.number + 2})}"
