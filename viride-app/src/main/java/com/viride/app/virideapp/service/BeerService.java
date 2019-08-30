@@ -21,9 +21,9 @@ public interface BeerService {
 	
 	public void deleteBeer(String brewery_id) throws VirideException ;
 
-	public void bulkAdd();
+	public void bulkAdd(int size);
 
-	public void bulkDetele();
+	public void bulkDetele(int size);
 
 	public Page<Beer> findPaginated(Pageable pageable);
 

@@ -60,4 +60,16 @@ public class VirideController {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "id Not Found", e);
 		}
 	}
+	
+	@GetMapping(path = "/beer/bulkAdd/{size}")
+	public String bulkAdd(@PathVariable int size) {
+		service.bulkAdd(size);
+		return "Done";
+	}
+
+	@GetMapping(path = "/beer/bulkDelete/{size}")
+	public String bulkDelete(@PathVariable int size) {
+		service.bulkDetele(size);
+		return "Done";
+	}
 }

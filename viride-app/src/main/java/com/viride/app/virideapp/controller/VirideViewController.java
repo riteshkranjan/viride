@@ -66,13 +66,13 @@ public class VirideViewController {
 
 	@RequestMapping(path = "/bulkAdd")
 	public String bulkAdd(Model model) {
-		service.bulkAdd();
+		service.bulkAdd(1000);
 		return "redirect:/";
 	}
 
 	@RequestMapping(path = "/bulkDelete")
 	public String bulkDelete(Model model) {
-		service.bulkDetele();
+		service.bulkDetele(1000);
 		return "redirect:/";
 	}
 

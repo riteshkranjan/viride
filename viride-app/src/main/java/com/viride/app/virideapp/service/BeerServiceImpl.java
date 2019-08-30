@@ -27,7 +27,8 @@ public class BeerServiceImpl implements BeerService {
 	@Override
 	public List<Beer> getAllBeers() {
 		List<Beer> res = new ArrayList<>();
-		repo.findAll().forEach(e -> res.add(e));
+		Pageable p = PageRequest.of(0, 40);
+		repo.findAll(p).forEach(e -> res.add(e));
 		return res;
 	}
 
@@ -100,11 +101,11 @@ public class BeerServiceImpl implements BeerService {
 	}
 
 	@Override
-	public void bulkAdd() {
+	public void bulkAdd(int size) {
 		Random r = new Random();
-		for (int i = 0; i < 1000; i++) {
+		for (int i = 0; i < size; i++) {
 			UUID u = UUID.randomUUID();
-			int randomInt = r.nextInt(1000);
+			int randomInt = r.nextInt(size);
 			Beer b = new Beer();
 			b.setBrewery_id(u.toString());
 			b.setAbv(r.nextFloat());
@@ -122,9 +123,9 @@ public class BeerServiceImpl implements BeerService {
 	}
 
 	@Override
-	public void bulkDetele() {
+	public void bulkDetele(int size) {
 		List<Beer> beers = getAllBeers();
-		int limit = beers.size() > 1000 ? 1000 : beers.size();
+		int limit = beers.size() > size ? size : beers.size();
 		for (int i = 0; i < limit; i++) {
 			Beer b = beers.get(i);
 			repo.delete(b);
